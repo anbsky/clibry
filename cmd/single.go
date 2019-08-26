@@ -8,15 +8,15 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var streamCmd = &cobra.Command{
-	Use:   "stream",
-	Short: "issue a batch of stream playback requests",
+var singleCmd = &cobra.Command{
+	Use:   "single",
+	Short: "issue a single query",
 	Run: func(cmd *cobra.Command, args []string) {
 		var (
 			n   int
 			err error
 		)
-		if len(args) < 1 {
+		if len(args) < 2 {
 			n = 0
 		} else {
 			n, err = strconv.Atoi(args[0])
@@ -24,10 +24,10 @@ var streamCmd = &cobra.Command{
 				log.Fatalf("%v is not an integer", args[0])
 			}
 		}
-		client.LaunchStreams(n)
+		client.LaunchQuery(n, args[1])
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(streamCmd)
+	rootCmd.AddCommand(singleCmd)
 }

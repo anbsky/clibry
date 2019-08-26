@@ -8,9 +8,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var streamCmd = &cobra.Command{
-	Use:   "stream",
-	Short: "issue a batch of stream playback requests",
+var queryCmd = &cobra.Command{
+	Use:   "query",
+	Short: "playback a batch of hourly queries",
 	Run: func(cmd *cobra.Command, args []string) {
 		var (
 			n   int
@@ -24,10 +24,10 @@ var streamCmd = &cobra.Command{
 				log.Fatalf("%v is not an integer", args[0])
 			}
 		}
-		client.LaunchStreams(n)
+		client.LaunchClients(n)
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(streamCmd)
+	rootCmd.AddCommand(queryCmd)
 }
